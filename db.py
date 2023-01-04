@@ -15,5 +15,4 @@ class DataBase:
         cursor = db.cursor()
         cursor.execute(query)
         db.commit()
-        cursor.close()
         return cursor.fetchall()

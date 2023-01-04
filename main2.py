@@ -14,4 +14,5 @@ print("К примеру: 02.01.2023, 22:40")
 date2 = str(input())
 time2 = str(input())
 
-
+r = db.fetchall(f"SELECT value FROM data WHERE date = '{date2}' and time = '{time2}'")
+print(r)
