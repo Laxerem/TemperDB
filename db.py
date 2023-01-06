@@ -10,9 +10,9 @@ class DataBase:
         db.commit()
         cursor.close()
 
-    def fetchall(self, query):
+    def fetchall(self, query, *args):
         db = sqlite3.connect("temper.db")
         cursor = db.cursor()
-        cursor.execute(query)
+        cursor.execute(query, args)
         db.commit()
         return cursor.fetchall()
