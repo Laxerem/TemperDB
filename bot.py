@@ -1,7 +1,7 @@
 import telebot
 import stats
 
-bot = telebot.TeleBot(open("configs/token").readlines()[0])
+bot = telebot.TeleBot(open("configs/token").readline().strip())
 
 
 @bot.message_handler(commands=['start'])
