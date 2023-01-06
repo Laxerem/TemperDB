@@ -7,7 +7,7 @@ from db import DataBase
 
 
 def read_temp():
-    file = open(open("configs/path_to_temp").readline())
+    file = open(open("configs/path_to_temp").readlines()[0])
     return int(file.readline())
 
 
