@@ -22,3 +22,9 @@ def get_records_by_datetime(date, time):
         result += f"{row[0]}\n"
 
     return result
+
+
+def get_last_temp():
+    rows = db.fetchall(f"SELECT value, date, time  FROM data ORDER BY date DESC, time DESC LIMIT 1")
+    result = f"*{rows[0][0]}*\n\n _{rows[0][1]} {rows[0][2]}_"
+    return result

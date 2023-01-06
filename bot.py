@@ -6,11 +6,10 @@ bot = telebot.TeleBot(open("configs/token").readline())
 
 @bot.message_handler(commands=['start'])
 def activate(message):
-    print(message.chat.id)
     bot.send_message(message.chat.id, "Привет, я робот помошник")
     bot.send_message(message.chat.id, "Ты можешь получить статистику за любой день и время, используя команду /stats")
-    bot.send_message(message.chat.id, "Например: \n\nполучить температуру за конкретный день и время:\n /stats "
-                                      "06.01.2023 20:54\n\nполучить статистику за весь день:\n/stats 06.01.2023")
+    bot.send_message(message.chat.id, "Например: \n\n*Получить текущую температуру:*\n/stats\n\n*Получить температуру за конкретный день и время:*\n /stats "
+                                      "06.01.2023 20:54\n\n*Получить статистику за весь день:*\n/stats 06.01.2023", parse_mode="markdown")
 
 
 @bot.message_handler(commands=['stats'])
@@ -24,10 +23,12 @@ def process_stats(message):
         result = stats.get_records_by_datetime(array[1], array[2])
     elif len(array) == 2:
         result = stats.get_records_by_day(array[1])
+    elif len(array) == 1:
+        result = stats.get_last_temp()
     else:
         result = "Данные введены не верно"
 
-    bot.send_message(message.chat.id, result)
+    bot.send_message(message.chat.id, result, parse_mode="markdown")
 
 
 @bot.message_handler(content_types=['text'])
