@@ -1,4 +1,3 @@
-import sys
 import datetime
 import time
 from threading import Thread

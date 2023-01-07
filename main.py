@@ -10,8 +10,18 @@ db.query("CREATE TABLE IF NOT EXISTS data (id INTEGER PRIMARY KEY AUTOINCREMENT,
 t1 = TempWriter()
 t1.start()
 
-t2 = Thread(target=bot.polling, daemon=True, kwargs={'none_stop': True, 'interval': 0})
+
+def bot_start():
+    while True:
+        try:
+            bot.polling(none_stop=True, interval=0)
+        except Exception:
+            pass
+
+
+t2 = Thread(target=bot_start, daemon=True)
 t2.start()
+
 
 t1.join()
 t2.join()
