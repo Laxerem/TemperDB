@@ -15,7 +15,7 @@ def bot_start():
     while True:
         try:
             bot.polling(none_stop=True, interval=0)
-        except ZeroDivisionError:
+        except Exception:
             pass
 
 
