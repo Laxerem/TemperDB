@@ -21,4 +21,4 @@ class TempWriter(Thread):
             value = read_temp() / 1000
             date = datetime.datetime.now()
             self.db.query(f"INSERT INTO data (date, time, value) VALUES ('{date.strftime('%d.%m.%Y')}', '{date.strftime('%H:%M')}', {value})")
-            time.sleep(60)
+            time.sleep(1800)
