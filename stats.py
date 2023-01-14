@@ -20,12 +20,12 @@ def get_records_by_datetime(date, time):
 
     if len(rows) == 0:
         query = "SELECT * FROM (SELECT time, value FROM data WHERE date=? and time<? ORDER BY id DESC LIMIT 1) UNION " + \
-                "SELECT * FROM (SELECT time, value FROM data WHERE date=? and time<? ORDER BY 'date' DESC LIMIT 1)"
+                "SELECT * FROM (SELECT time, value FROM data WHERE date=? and time>? ORDER BY 'date' DESC LIMIT 1)"
         print(query)
         rows = db.fetchall(query, date, time, date, time)
         print(rows)
         for row in rows:
-            result += f"*{row[0]}, {row[1]}\n"
+            result += f"*{row[0]}, {row[1]}*\n"
     else:
         for row in rows:
             result += f"{row[0]}\n"
