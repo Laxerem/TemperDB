@@ -41,3 +41,14 @@ def get_last_temp():
     rows = db.fetchall(f"SELECT value, date, time  FROM data ORDER BY date DESC, time DESC LIMIT 1")
     result = f"*{rows[0][0]}*\n\n _{rows[0][1]} {rows[0][2]}_"
     return result
+
+
+def stats_temp(date):
+    rows = db.fetchall(f"SELECT time, value FROM data WHERE date=? ORDER BY value ASC", date)
+    result = str()
+
+    for row in rows:
+        result += f"{row[0]}, {row[1]}"
+        result += "\n"
+
+    return result
