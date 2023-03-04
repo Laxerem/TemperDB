@@ -17,9 +17,9 @@ def activate(message):
                                       "*Получить статистику за день (от меньшего значения к большему):*\n\n/stats "
                                       "06.01.2023", parse_mode="markdown")
 
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton("Последняя Температура")
-    markup.add(btn1)
+    #markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    #btn1 = types.KeyboardButton("Последняя Температура")
+    #markup.add(btn1)
 
 
 @bot.message_handler(commands=['temp'])
