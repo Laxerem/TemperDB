@@ -3,3 +3,4 @@
 configs/token
 configs/path_to_temp
 tests/*
+__pycache__
