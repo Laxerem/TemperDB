@@ -38,7 +38,7 @@ def get_records_by_datetime(date, time):
 
 
 def get_last_temp():
-    rows = db.fetchall(f"SELECT value, date, time  FROM data ORDER BY date DESC, time DESC LIMIT 1")
+    rows = db.fetchall(f"SELECT value, date, time  FROM data ORDER BY id DESC LIMIT 1")
     result = f"*{rows[0][0]}*\n\n _{rows[0][1]} {rows[0][2]}_"
     return result
 
@@ -52,3 +52,7 @@ def stats_temp(date):
         result += "\n"
 
     return result
+
+
+def last_stats_temp():
+    rows = db.fetchall(f"SELECT date, time, value FROM data ORDER BY date DESC, value ASC")
