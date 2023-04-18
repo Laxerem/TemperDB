@@ -10,16 +10,28 @@ bot = telebot.TeleBot(open("configs/token").readline().strip())
 @bot.message_handler(commands=['start'])
 def activate(message):
     bot.send_message(message.chat.id, "Привет, я робот помошник")
-    bot.send_message(message.chat.id, "Ты можешь получить температуру за любой день и время, используя команду /temp")
+    bot.send_message(message.chat.id, "Ты можешь получить температуру или статистику за любой день и время, используя "
+                                      "команды /temp или /stats")
     bot.send_message(message.chat.id, "Например: \n\n*Получить текущую температуру:*\n/temp\n\n*Получить температуру "
                                       "за конкретный день и время:*\n /temp "
                                       "06.01.2023 20:54\n\n*Получить температуру за весь день:*\n/temp 06.01.2023\n\n"
-                                      "*Получить статистику за день (от меньшего значения к большему):*\n\n/stats "
-                                      "06.01.2023", parse_mode="markdown")
+                                      "*Получить статистику за конкретный день (от меньшего значения к "
+                                      "большему):*\n/stats "
+                                      "06.01.2023\n\n*Получить статистику за сегодняшний день:*\n/stats", parse_mode="markdown")
+    bot.send_message(message.chat.id, "*Узнать последнее изменение в боте:*\n/bot", parse_mode="markdown")
 
-    #markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    #btn1 = types.KeyboardButton("Последняя Температура")
-    #markup.add(btn1)
+    # markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    # btn1 = types.KeyboardButton("Последняя Температура")
+    # markup.add(btn1)
+
+
+@bot.message_handler(commands=['bot'])
+def process_bot(message):
+    bot.send_message(message.chat.id, "Вот последнее изменение в боте:")
+    bot.send_message(message.chat.id, "Добавление простой команды в статистику, теперь, чтобы узнать статистику за "
+                                      "сегодняшний день, вам не нужно вводить текущую дату, просто введите команду "
+                                      "*/stats*", parse_mode="markdown")
+    bot.send_message(message.chat.id, "Дата изменения(ий): 18.04.2023")
 
 
 @bot.message_handler(commands=['temp'])
@@ -48,6 +60,8 @@ def process_stats(message):
 
     if len(array) == 2:
         result = stats.stats_temp(array[1])
+    elif len(array) == 1:
+        result = stats.last_stats_temp()
     else:
         result = "Данные введены не верно"
 
