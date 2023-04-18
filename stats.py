@@ -55,12 +55,12 @@ def stats_temp(date):
 
 
 def last_stats_temp():
-    rows = db.fetchall(f"SELECT date, time, value FROM data WHERE date = (SELECT date FROM data WHERE ID = (SELECT "
+    rows = db.fetchall(f"SELECT time, value FROM data WHERE date = (SELECT date FROM data WHERE ID = (SELECT "
                        f"MAX(ID) FROM data)) ORDER BY value ASC;")
     result = str()
 
     for row in rows:
-        result += f"{row[0]}, {row[1]}, {row[2]}"
+        result += f"{row[0]}, {row[1]}"
         result += "\n"
 
     return result
